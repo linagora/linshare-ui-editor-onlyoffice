@@ -5,7 +5,7 @@
         <!--<op-sidebar/>-->
       </v-navigation-drawer>
       <v-toolbar clipped-left app fixed color="primary" v-if="$auth.check()">
-        <v-toolbar-side-icon></v-toolbar-side-icon>
+        <v-toolbar-side-icon color="primary"></v-toolbar-side-icon>
         <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
           <img class="hidden-sm-and-down" id="header-logo" src="@/assets/logo.svg"/>
         </v-toolbar-title>
