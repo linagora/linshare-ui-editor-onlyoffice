@@ -16,15 +16,14 @@ const actions = {
   logout({ dispatch }) {
     return new Promise(resolve => {
       Vue.auth.logout();
-      dispatch("session/resetSession");
+      dispatch("resetSession");
       resolve();
     });
   },
 
-  resetSession({ commit, dispatch }) {
-    // TODO, should reset the whole store
-    commit(types.FETCH_USER, {});
-    dispatch("session/setJWTToken", null);
+  resetSession({ dispatch }) {
+    dispatch("user/resetUser", null, { root: true });
+    dispatch("setJWTToken", "");
   }
 };
 

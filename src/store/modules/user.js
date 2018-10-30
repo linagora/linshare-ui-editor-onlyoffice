@@ -13,6 +13,10 @@ const actions = {
     Vue.axios.get("api/user").then(response => {
       commit(types.SET_USER, response.data);
     });
+  },
+
+  resetUser({ commit }) {
+    commit(types.SET_USER, {});
   }
 };
 
