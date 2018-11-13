@@ -11,18 +11,18 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home,
-      meta: {
-        auth: true
-      }
+      // meta: {
+      //   auth: true
+      // }
     },
-    {
-      path: "/login",
-      name: "login",
-      component: Login,
-      meta: {
-        auth: false
-      }
-    },
+    // {
+    //   path: "/login",
+    //   name: "login",
+    //   component: Login,
+    //   meta: {
+    //     auth: false
+    //   }
+    // },
     {
       path: "/about",
       name: "about",

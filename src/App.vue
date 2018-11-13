@@ -1,17 +1,17 @@
 <template>
-  <v-app id="openpaas">
+  <v-app id="linshare-editor">
     <div v-if="$auth.ready()">
       <v-navigation-drawer clipped fixed app>
         <!--<op-sidebar/>-->
       </v-navigation-drawer>
-      <v-toolbar clipped-left app fixed color="primary" v-if="$auth.check()">
+      <v-toolbar clipped-left app fixed color="primary">
         <v-toolbar-side-icon color="primary"></v-toolbar-side-icon>
         <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
           <img class="hidden-sm-and-down" id="header-logo" src="@/assets/logo.svg"/>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <!--<op-applications-menu/>-->
-        <op-user-menu/>
+        <!--<op-user-menu/>-->
       </v-toolbar>
       <v-content>
         <v-container fluid fill-height>
@@ -37,11 +37,11 @@ export default {
     'op-user-menu': UserMenu,
     'op-snackbar': Snackbar
   },
-  created () {
-    this.$auth.ready(() => {
-      this.$store.dispatch('user/fetchUser');
-    });
-  },
+//  created () {
+//    this.$auth.ready(() => {
+//      this.$store.dispatch('user/fetchUser');
+//    });
+//  },
 };
 </script>
 
