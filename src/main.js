@@ -9,8 +9,17 @@ import Vuetify from "vuetify";
 import theme from "./theme";
 import "./main.styl";
 
-Vue.use(VueAxios, axios);
-axios.defaults.baseURL = store.state.linshareBaseUrl;
+const linshareAxios = axios.create();
+const backendAxios = axios.create();
+
+// Two instances of axios for Linshare and backend
+Vue.use(VueAxios, {
+  linshare: linshareAxios,
+  backend: backendAxios
+});
+
+linshareAxios.defaults.baseURL = store.state.linshareBaseUrl;
+backendAxios.defaults.baseURL = store.state.backendBaseUrl;
 Vue.router = router;
 
 Vue.use(require("@websanova/vue-auth"), services.auth);

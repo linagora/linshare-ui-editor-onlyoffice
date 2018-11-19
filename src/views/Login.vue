@@ -39,29 +39,26 @@ export default {
     };
   },
   methods: {
-    login() {
+    login: async function() {
       this.logMeIn = true;
-      this.$auth.login({
-        url: 'linshare/webservice/rest/user/v2/authentication/jwt',
-        method: 'GET',
-        auth: {
-          username: this.email,
-          password: this.password
-        },
-        rememberMe: false,
-        redirect: { name: 'home' }
-      })
-      .then(response => {
-        this.$store.dispatch('session/setJWTToken', response.data.token);
+      try {
+        const response = await this.$auth.login({
+          url: 'linshare/webservice/rest/user/v2/authentication/jwt',
+          method: 'GET',
+          auth: {
+            username: this.email,
+            password: this.password
+          },
+          rememberMe: false,
+          redirect: { name: 'home' }
+        });
 
-        return response.data;
-      })
-      .catch(err => {
+        this.$store.dispatch('session/setJWTToken', response.data.token);
+      } catch(e) {
         this.$store.dispatch('ui/displaySnackbar', { message: 'Login error, please retry' });
-      })
-      .finally(() => {
-        setTimeout(() => (this.logMeIn = false), 300);
-      });
+      } finally {
+        this.logMeIn = false
+      }
     }
   }
 };
