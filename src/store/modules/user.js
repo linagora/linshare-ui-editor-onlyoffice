@@ -10,7 +10,7 @@ const types = {
 
 const actions = {
   fetchUser({ commit }) {
-    Vue.axios.get("api/user").then(response => {
+    Vue.axios.get("linshare/webservice/rest/user/v2/authentication/authorized").then(response => {
       commit(types.SET_USER, response.data);
     });
   },

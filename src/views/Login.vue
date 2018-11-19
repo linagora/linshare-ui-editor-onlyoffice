@@ -42,7 +42,8 @@ export default {
     login() {
       this.logMeIn = true;
       this.$auth.login({
-        url: 'api/jwt/generate',
+        url: 'linshare/webservice/rest/user/v2/authentication/jwt',
+        method: 'GET',
         auth: {
           username: this.email,
           password: this.password
@@ -51,8 +52,7 @@ export default {
         redirect: { name: 'home' }
       })
       .then(response => {
-        this.$store.dispatch('session/setJWTToken', response.data);
-        this.$store.dispatch('user/fetchUser');
+        this.$store.dispatch('session/setJWTToken', response.data.token);
 
         return response.data;
       })

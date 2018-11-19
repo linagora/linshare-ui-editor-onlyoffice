@@ -5,10 +5,12 @@ export default {
   http: require("@websanova/vue-auth/drivers/http/axios.1.x"),
   router: require("@websanova/vue-auth/drivers/router/vue-router.2.x"),
   refreshData: {
-    enabled: false
+    enabled: true,
+    url: 'linshare/webservice/rest/user/v2/authentication/jwt',
+    method: "GET"
   },
   fetchData: {
-    url: "api/user",
+    url: "linshare/webservice/rest/user/v2/authentication/authorized",
     method: "GET",
     enabled: true
   }

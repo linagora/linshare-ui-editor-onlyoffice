@@ -5,13 +5,13 @@
 export default {
   request(req, token) {
     this.options.http._setHeaders.call(this, req, {
-      Authorization: `Bearer  ${token}`
+      Authorization: `Bearer ${token}`
     });
   },
 
   response(res) {
-    if (res.request.responseURL.endsWith("jwt/generate")) {
-      return res.data;
+    if (res.request.responseURL.endsWith("authentication/jwt")) {
+      return res.data.token;
     }
   }
 };
