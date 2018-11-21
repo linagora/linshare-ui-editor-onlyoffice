@@ -11,7 +11,7 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <!--<op-applications-menu/>-->
-        <!--<op-user-menu/>-->
+        <op-user-menu/>
       </v-toolbar>
       <v-content>
         <v-container fluid fill-height>
