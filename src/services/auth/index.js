@@ -14,5 +14,6 @@ export default {
     url: "linshare/webservice/rest/user/v2/authentication/authorized",
     method: "GET",
     enabled: true
-  }
+  },
+  parseUserData: data => data || {}
 };
