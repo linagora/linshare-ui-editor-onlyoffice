@@ -2,18 +2,29 @@
     <div class="editor">
         <v-progress-circular indeterminate :size="50" color="primary" v-if="loading"></v-progress-circular>
         <div id="placeholder"></div>
+        <v-dialog v-model="errorDialog" persistent max-width="290">
+          <v-card>
+            <v-card-text>Error while opening document. Please refresh page.</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" flat @click="onRefreshBtnClick()">Refresh</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
     </div>
 </template>
 
 <script>
   import io from "socket.io-client";
   import { DOCUMENT_LOAD_STATES, WEBSOCKET_EVENTS, WEBSOCKET_URL } from '../constants';
+import { log } from 'util';
 
   export default {
     name: "editor",
     data: function() {
       return {
-        loading: false
+        loading: true,
+        errorDialog: false
       }
     },
     methods: {
@@ -35,29 +46,28 @@
             callbackUrl: `${process.env.VUE_APP_BACKEND_URL}${document.callbackUrlPath}`
           }
         });
+      },
+      onRefreshBtnClick: function() {
+        this.$router.go();
       }
     },
     async mounted() {
+      const userEmail = this.$auth.user().mail;
       const { workGroupId: workGroupId, documentId } = this.$route.params;
-      const sio = io(WEBSOCKET_URL);
-
-      sio.on(WEBSOCKET_EVENTS.CONNECT, () => sio.emit(WEBSOCKET_EVENTS.SUBSCRIBE, documentId));
-
-      const { data } = await this.axios.backend({
-        method: 'GET',
-        url: `api/documents?workGroupUuid=${workGroupId}&documentUuid=${documentId}`
+      const sio = io(WEBSOCKET_URL, {
+        query: `token=${this.$auth.token()}&userEmail=${userEmail}`
       });
 
-      if (data.state === DOCUMENT_LOAD_STATES.LOADING) {
-        this.loading = true;
-        sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_DONE, ({ document }) => {
-          this.loading = false;
-          this.openDocument(document);
-        });
-      } else if (data.state === DOCUMENT_LOAD_STATES.LOADED) {
+      sio.on(WEBSOCKET_EVENTS.CONNECT, () => sio.emit(WEBSOCKET_EVENTS.SUBSCRIBE, { workGroupId, documentId }));
+
+      sio.on(WEBSOCKET_EVENTS.ERROR, (error) => {
+        this.errorDialog = true;
+      });
+
+      sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_DONE, ({ document }) => {
         this.loading = false;
-        this.openDocument(data)
-      }
+        this.openDocument(document);
+      });
     }
   };
 </script>
