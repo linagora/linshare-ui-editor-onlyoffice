@@ -42,6 +42,7 @@ export default {
     login: async function() {
       this.logMeIn = true;
       try {
+        const redirect = this.$auth.redirect();
         const response = await this.$auth.login({
           url: 'linshare/webservice/rest/user/v2/authentication/jwt',
           method: 'GET',
@@ -50,7 +51,7 @@ export default {
             password: this.password
           },
           rememberMe: false,
-          redirect: { name: 'home' }
+          redirect: { path: redirect ? redirect.from.path : '/' }
         });
 
         this.$store.dispatch('session/setJWTToken', response.data.token);
