@@ -17,7 +17,6 @@
 <script>
   import io from "socket.io-client";
   import { DOCUMENT_LOAD_STATES, WEBSOCKET_EVENTS, WEBSOCKET_URL } from '../constants';
-import { log } from 'util';
 
   export default {
     name: "editor",
@@ -28,24 +27,8 @@ import { log } from 'util';
       }
     },
     methods: {
-      openDocument: function (document) {
-        const user = this.$auth.user();
-
-        DocsAPI.DocEditor("placeholder", {
-          document: {
-            fileType: document.fileType,
-            title: document.name,
-            url: `${process.env.VUE_APP_BACKEND_URL}${document.downloadUrlPath}`
-          },
-          documentType: document.documentType,
-          editorConfig: {
-            user: {
-              id: user.uuid,
-              name: `${user.firstName} ${user.lastName}`
-            },
-            callbackUrl: `${process.env.VUE_APP_BACKEND_URL}${document.callbackUrlPath}`
-          }
-        });
+      openDocument: function (payload) {
+        DocsAPI.DocEditor("placeholder", payload);
       },
       onRefreshBtnClick: function() {
         this.$router.go();
@@ -58,15 +41,16 @@ import { log } from 'util';
         query: `token=${this.$auth.token()}&userEmail=${userEmail}`
       });
 
-      sio.on(WEBSOCKET_EVENTS.CONNECT, () => sio.emit(WEBSOCKET_EVENTS.SUBSCRIBE, { workGroupId, documentId }));
+      sio.on(WEBSOCKET_EVENTS.CONNECT, () => sio.emit(WEBSOCKET_EVENTS.SUBSCRIBE, { workGroupId, documentId, documentStorageServerUrl: process.env.VUE_APP_BACKEND_URL }));
 
       sio.on(WEBSOCKET_EVENTS.ERROR, (error) => {
         this.errorDialog = true;
+        this.loading = false;
       });
 
-      sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_DONE, ({ document }) => {
+      sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_DONE, (payload) => {
         this.loading = false;
-        this.openDocument(document);
+        this.openDocument(payload);
       });
     }
   };
