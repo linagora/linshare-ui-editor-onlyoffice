@@ -20,8 +20,8 @@ import Snackbar from "@/components/Snackbar.vue";
 
 export default {
   components: {
-    'op-user-menu': UserMenu,
-    'op-snackbar': Snackbar
+    "op-user-menu": UserMenu,
+    "op-snackbar": Snackbar
   }
 };
 </script>

@@ -15,45 +15,51 @@
 </template>
 
 <script>
-  import io from "socket.io-client";
-  import { DOCUMENT_LOAD_STATES, WEBSOCKET_EVENTS, WEBSOCKET_URL } from '../constants';
+import io from "socket.io-client";
+import { WEBSOCKET_EVENTS, WEBSOCKET_URL } from "../constants";
 
-  export default {
-    name: "editor",
-    data: function() {
-      return {
-        loading: true,
-        errorDialog: false
-      }
+export default {
+  name: "editor",
+  data: function() {
+    return {
+      loading: true,
+      errorDialog: false
+    };
+  },
+  methods: {
+    openDocument: function(payload) {
+      DocsAPI.DocEditor("placeholder", payload);
     },
-    methods: {
-      openDocument: function (payload) {
-        DocsAPI.DocEditor("placeholder", payload);
-      },
-      onRefreshBtnClick: function() {
-        this.$router.go();
-      }
-    },
-    async mounted() {
-      const userEmail = this.$auth.user().mail;
-      const { workGroupId: workGroupId, documentId } = this.$route.params;
-      const sio = io(WEBSOCKET_URL, {
-        query: `token=${this.$auth.token()}&userEmail=${userEmail}`
-      });
-
-      sio.on(WEBSOCKET_EVENTS.CONNECT, () => sio.emit(WEBSOCKET_EVENTS.SUBSCRIBE, { workGroupId, documentId, documentStorageServerUrl: process.env.VUE_APP_BACKEND_URL }));
-
-      sio.on(WEBSOCKET_EVENTS.ERROR, (error) => {
-        this.errorDialog = true;
-        this.loading = false;
-      });
-
-      sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_DONE, (payload) => {
-        this.loading = false;
-        this.openDocument(payload);
-      });
+    onRefreshBtnClick: function() {
+      this.$router.go();
     }
-  };
+  },
+  async mounted() {
+    const userEmail = this.$auth.user().mail;
+    const { workGroupId: workGroupId, documentId } = this.$route.params;
+    const sio = io(WEBSOCKET_URL, {
+      query: `token=${this.$auth.token()}&userEmail=${userEmail}`
+    });
+
+    sio.on(WEBSOCKET_EVENTS.CONNECT, () =>
+      sio.emit(WEBSOCKET_EVENTS.SUBSCRIBE, {
+        workGroupId,
+        documentId,
+        documentStorageServerUrl: process.env.VUE_APP_BACKEND_URL
+      })
+    );
+
+    sio.on(WEBSOCKET_EVENTS.ERROR, () => {
+      this.errorDialog = true;
+      this.loading = false;
+    });
+
+    sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_DONE, payload => {
+      this.loading = false;
+      this.openDocument(payload);
+    });
+  }
+};
 </script>
 <style lang="stylus" scoped>
     .editor

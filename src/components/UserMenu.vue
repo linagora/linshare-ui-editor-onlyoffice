@@ -27,31 +27,29 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'op-user-menu',
+  name: "op-user-menu",
   methods: {
     logout() {
-      this.$store.dispatch('session/logout').then(() => {
-        this.$router.push({name: 'login'});
+      this.$store.dispatch("session/logout").then(() => {
+        this.$router.push({ name: "login" });
       });
     },
 
-    profile() {
-    },
+    profile() {},
 
-    settings() {
-    }
+    settings() {}
   },
   computed: {
     ...mapGetters({
-      getAvatarUrl: 'user/getAvatarUrl',
-      getDisplayName: 'user/getDisplayName',
-      getEmail: 'user/getEmail'
+      getAvatarUrl: "user/getAvatarUrl",
+      getDisplayName: "user/getDisplayName",
+      getEmail: "user/getEmail"
     })
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>

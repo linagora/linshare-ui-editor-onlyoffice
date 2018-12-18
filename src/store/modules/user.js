@@ -28,11 +28,7 @@ const mutations = {
 
 const getters = {
   getAvatarUrl(state, getters, rootState) {
-    return (
-      state.user &&
-      state.user._id &&
-      `${rootState.baseUrl}/api/users/${state.user._id}/profile/avatar`
-    );
+    return state.user && state.user._id && `${rootState.baseUrl}/api/users/${state.user._id}/profile/avatar`;
   },
 
   getDisplayName(state) {
