@@ -28,14 +28,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
   data() {
     return {
       logMeIn: false,
       email: null,
-      password: null,
+      password: null
     };
   },
   methods: {
@@ -44,21 +42,23 @@ export default {
       try {
         const redirect = this.$auth.redirect();
         const response = await this.$auth.login({
-          url: 'linshare/webservice/rest/user/v2/authentication/jwt',
-          method: 'GET',
+          url: "linshare/webservice/rest/user/v2/authentication/jwt",
+          method: "GET",
           auth: {
             username: this.email,
             password: this.password
           },
           rememberMe: false,
-          redirect: { path: redirect ? redirect.from.path : '/' }
+          redirect: { path: redirect ? redirect.from.path : "/" }
         });
 
-        this.$store.dispatch('session/setJWTToken', response.data.token);
-      } catch(e) {
-        this.$store.dispatch('ui/displaySnackbar', { message: 'Login error, please retry' });
+        this.$store.dispatch("session/setJWTToken", response.data.token);
+      } catch (e) {
+        this.$store.dispatch("ui/displaySnackbar", {
+          message: "Login error, please retry"
+        });
       } finally {
-        this.logMeIn = false
+        this.logMeIn = false;
       }
     }
   }

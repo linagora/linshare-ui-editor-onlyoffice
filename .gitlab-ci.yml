@@ -1,17 +1,21 @@
 image: node:10
 
 stages:
+  - lint
   - test
 
-check:
-  image: docker-registry.linagora.com:5000/linshare-snapshots/linshare-build-helper:latest
-  stage: test
+lint:
+  stage: lint
+  except:
+    - triggers
   tags:
-      - docker
+    - docker
+  image: node:10
   script:
-    - check_author.py check "${GITLAB_USER_EMAIL}" "${GITLAB_USER_NAME}" --no-accents
+    - npm install
+    - npm run lint
 
-test:
+test_unit:
   stage: test
   except:
     - triggers
@@ -21,3 +25,16 @@ test:
   script:
    - npm install
    - npm run test:unit
+
+test_e2e:
+  stage: test
+  except:
+    - triggers
+  tags:
+    - docker
+  environment:
+    name: production
+  image: cypress/base:10
+  script:
+    - npm install
+    - npm run test:e2e -- --headless
