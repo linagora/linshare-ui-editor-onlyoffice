@@ -3,6 +3,6 @@
 describe("My First Test", () => {
   it("Visits the app root url", () => {
     cy.visit("/");
-    cy.contains("body", "OpenPaaS Login");
+    cy.contains("body", "Login");
   });
 });
