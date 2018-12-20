@@ -53,14 +53,30 @@ export default {
       })
     );
 
-    sio.on(WEBSOCKET_EVENTS.ERROR, () => {
-      this.errorDialog = true;
+    sio.on(WEBSOCKET_EVENTS.ERROR, error => {
       this.loading = false;
+
+      try {
+        error = JSON.parse(error);
+      } catch (error) {} // eslint-disable-line
+
+      if (error.code === 401) {
+        this.$auth.logout({
+          redirect: "/login"
+        });
+      } else {
+        this.errorDialog = true;
+      }
     });
 
     sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_DONE, payload => {
       this.loading = false;
       this.openDocument(payload);
+    });
+
+    sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_FAILED, () => {
+      this.loading = false;
+      this.errorDialog = true;
     });
   }
 };
