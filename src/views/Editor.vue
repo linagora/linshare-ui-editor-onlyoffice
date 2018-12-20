@@ -1,6 +1,10 @@
 <template>
     <div class="editor">
-        <v-progress-circular indeterminate :size="50" color="primary" v-if="loading"></v-progress-circular>
+        <div v-if="loading">
+          <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
+          <v-card-text class="loading-text">Loading ...</v-card-text>
+        </div>
+
         <div id="placeholder"></div>
         <v-dialog v-model="errorDialog" persistent max-width="290">
           <v-card>
@@ -65,4 +69,10 @@ export default {
     .editor
       width: 100vw;
       height: 100vh;
+      text-align:center;
+
+      .v-progress-circular
+        margin-top: 45vh !important; //override default css
+      .loading-text
+        font-weight: bold;
 </style>
