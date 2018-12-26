@@ -9,10 +9,9 @@ import Vuetify from "vuetify";
 import theme from "./theme";
 import "./main.styl";
 
-axios.defaults.baseURL = store.state.linshareBaseUrl;
-
-Vue.router = router;
 Vue.use(VueAxios, axios);
+axios.defaults.baseURL = store.state.linshareBaseUrl;
+Vue.router = router;
 Vue.use(require("@websanova/vue-auth"), services.auth);
 Vue.use(Vuetify, { theme });
 
