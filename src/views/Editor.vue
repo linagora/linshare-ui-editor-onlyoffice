@@ -2,16 +2,16 @@
     <div class="editor">
         <div v-if="loading">
           <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
-          <v-card-text class="loading-text">Loading ...</v-card-text>
+          <v-card-text class="loading-text">{{$t('Loading ...')}}</v-card-text>
         </div>
 
         <div id="placeholder"></div>
         <v-dialog v-model="errorDialog" persistent max-width="290">
           <v-card>
-            <v-card-text>Error while opening document. Please refresh page.</v-card-text>
+            <v-card-text>{{$t('Error while opening document. Please refresh page.')}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat @click="onRefreshBtnClick()">Refresh</v-btn>
+              <v-btn color="green darken-1" flat @click="onRefreshBtnClick()">{{$t('Refresh')}}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -54,7 +54,7 @@ export default {
     );
 
     sio.on(WEBSOCKET_EVENTS.ERROR, error => {
-      this.loading = false;
+      this.loading = true;
 
       try {
         error = JSON.parse(error);
