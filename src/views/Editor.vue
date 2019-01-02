@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     openDocument: function(payload) {
+      payload.editorConfig.lang = this.$i18n.locale || "en";
       DocsAPI.DocEditor("placeholder", payload);
     },
     onRefreshBtnClick: function() {
