@@ -49,8 +49,7 @@ export default {
     sio.on(WEBSOCKET_EVENTS.CONNECT, () =>
       sio.emit(WEBSOCKET_EVENTS.SUBSCRIBE, {
         workGroupId,
-        documentId,
-        documentStorageServerUrl: process.env.VUE_APP_BACKEND_URL
+        documentId
       })
     );
 
