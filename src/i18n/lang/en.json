@@ -4,5 +4,9 @@
   "Welcome to Vue.js App": "Welcome to Vue.js App",
   "Loading ...": "Loading ...",
   "Error while opening document. Please refresh page.": "Error while opening document. Please refresh page.",
-  "Refresh": "Refresh"
+  "Refresh": "Refresh",
+  "Error!": "Error!",
+  "Document file format is not supported": "Document file format is not supported",
+  "Unable to process the document": "Unable to process the document",
+  "Back to LinShare": "Back to LinShare"
 }

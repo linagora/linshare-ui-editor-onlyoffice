@@ -4,5 +4,9 @@
   "Welcome to Vue.js App": "Chào mừng đến với ứng dụng Vuejs",
   "Loading ...": "Đang tải ...",
   "Error while opening document. Please refresh page.": "Có lỗi xảy ra. Vui lòng tải lại trang",
-  "Refresh": "Tải lại"
+  "Refresh": "Tải lại",
+  "Error!": "Có lỗi!",
+  "Document file format is not supported": "Định dạng của tài liệu không được hỗ trợ",
+  "Unable to process the document": "Không thể xử lý tài liệu",
+  "Back to LinShare": "Quay lại LinShare"
 }
