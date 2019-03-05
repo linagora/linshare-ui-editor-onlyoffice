@@ -1,33 +1,30 @@
 <template>
-    <div class="editor">
-        <div v-if="loading">
-          <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
-          <v-card-text class="loading-text">{{$t('Loading ...')}}</v-card-text>
-        </div>
+  <div class="editor">
+    <div id="placeholder"></div>
 
-        <div id="placeholder"></div>
-        <v-dialog v-model="errorDialog" persistent max-width="290">
-          <v-card>
-            <v-card-text>{{$t('Error while opening document. Please refresh page.')}}</v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat @click="onRefreshBtnClick()">{{$t('Refresh')}}</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+    <div class="loading-spinner" v-if="state === 'loading'">
+      <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
+      <v-card-text class="loading-text">{{$t("Loading ...")}}</v-card-text>
     </div>
+
+    <error-display v-if="state === 'error'" :error-type="errorType"></error-display>
+  </div>
 </template>
 
 <script>
 import io from "socket.io-client";
-import { WEBSOCKET_EVENTS, WEBSOCKET_URL } from "../constants";
+import ErrorDisplay from "@/components/ErrorDisplay.vue";
+import { WEBSOCKET_EVENTS, WEBSOCKET_URL } from "@/constants";
+import { getErrorType } from "@/services/utils";
 
 export default {
   name: "editor",
+  components: {
+    "error-display": ErrorDisplay
+  },
   data: function() {
     return {
-      loading: true,
-      errorDialog: false
+      state: "loading"
     };
   },
   methods: {
@@ -35,13 +32,13 @@ export default {
       payload.editorConfig.lang = this.$i18n.locale || "en";
       DocsAPI.DocEditor("placeholder", payload);
     },
-    onRefreshBtnClick: function() {
+    refresh: function() {
       this.$router.go();
     }
   },
   async mounted() {
     const userEmail = this.$auth.user().mail;
-    const { workGroupId: workGroupId, documentId } = this.$route.params;
+    const { workGroupId, documentId } = this.$route.params;
     const sio = io(WEBSOCKET_URL, {
       query: `token=${this.$auth.token()}&userEmail=${userEmail}`
     });
@@ -65,30 +62,34 @@ export default {
           redirect: "/login"
         });
       } else {
-        this.errorDialog = true;
+        this.state = "error";
       }
     });
 
     sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_DONE, payload => {
-      this.loading = false;
+      this.state = "loaded";
       this.openDocument(payload);
     });
 
-    sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_FAILED, () => {
-      this.loading = false;
-      this.errorDialog = true;
+    sio.on(WEBSOCKET_EVENTS.DOCUMENT_LOAD_FAILED, payload => {
+      this.state = "error";
+      this.errorType = getErrorType(payload);
     });
   }
 };
 </script>
 <style lang="stylus" scoped>
-    .editor
-      width: 100vw;
-      height: 100vh;
-      text-align:center;
+  .editor
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-      .v-progress-circular
-        margin-top: 45vh !important; //override default css
+    .loading-spinner
+      display: flex;
+      align-items: center;
+
       .loading-text
         font-weight: bold;
 </style>
