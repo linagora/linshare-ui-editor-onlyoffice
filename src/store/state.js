@@ -1,4 +1,8 @@
+import settings from "../settings";
+
+const { LINSHARE_URL, BACKEND_URL } = settings;
+
 export default () => ({
-  linshareBaseUrl: process.env.VUE_APP_LINSHARE_URL,
-  backendBaseUrl: process.env.VUE_APP_BACKEND_URL
+  linshareBaseUrl: LINSHARE_URL,
+  backendBaseUrl: BACKEND_URL
 });

@@ -8,11 +8,13 @@ import VueAxios from "vue-axios";
 import Vuetify from "vuetify";
 import theme from "./theme";
 import { i18n } from "@/i18n/index";
-
+import settings from "./settings";
 import "./main.styl";
 
+const { LINSHARE_URL } = settings;
+
+axios.defaults.baseURL = LINSHARE_URL;
 Vue.use(VueAxios, axios);
-axios.defaults.baseURL = store.state.linshareBaseUrl;
 Vue.router = router;
 Vue.use(require("@websanova/vue-auth"), services.auth);
 Vue.use(Vuetify, { theme });

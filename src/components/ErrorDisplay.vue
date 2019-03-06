@@ -11,14 +11,14 @@
 </template>
 
 <script>
+import settings from "@/settings";
+
 export default {
   name: "error-display",
   props: ["errorType"],
   data: function() {
     return {
-      linshareUrl: `${process.env.VUE_APP_LINSHARE_UI_USER_URL}#/sharedspace/workgroups/${
-        this.$route.params.workGroupId
-      }`
+      linshareUrl: `${settings.LINSHARE_UI_USER_URL}#/sharedspace/workgroups/${this.$route.params.workGroupId}`
     };
   },
   methods: {
