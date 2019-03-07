@@ -1,40 +1,118 @@
-image: node:10
+# vim: syntax=yaml textwidth=120 expandtab tabstop=2 softtabstop=2 shiftwidth=2 autoindent
 
 stages:
-  - lint
+  - prepare
+  - linters
+  - build
   - test
+  - deploy
 
-lint:
-  stage: lint
-  except:
-    - triggers
+
+.cache-tpl: &cache-tpl
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - node_modules
+  policy: pull
+
+.build-tpl: &build-tpl
+  image: node:11
   tags:
     - docker
-  image: node:10
+  cache:
+    <<: *cache-tpl
+
+.test-tpl: &test-tpl
+  <<: *build-tpl
+  except:
+    variables:
+      - $SKIP_TESTS
+    refs:
+      - master@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - tags@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - /^release-.*/@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+
+prepare:
+  <<: *build-tpl
+  stage: prepare
+  cache:
+    <<: *cache-tpl
+    policy: pull-push
   script:
     - npm install
+  except:
+    variables:
+      - $SKIP_PREPARE
+
+linters:
+  <<: *build-tpl
+  stage: linters
+  script:
     - npm run lint
+  except:
+    variables:
+      - $SKIP_LINTERS
+    refs:
+      - master@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - tags@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - /^release-.*/@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+
+check_author:
+  image: docker-registry.linagora.com:5000/lgs-releases/gitlab-integrity-checks:latest
+  stage: prepare
+  variables:
+    GIT_DEPTH: "1"
+  tags:
+    - ultralight
+  script:
+    - check_author.py check "$GITLAB_USER_EMAIL" "$GITLAB_USER_NAME" --no-accents
+  except:
+    refs:
+      - master@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - tags@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - /^release-.*/@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+
+build:
+  <<: *build-tpl
+  stage: build
+  script:
+    - npm run build
+  except:
+    variables:
+      - $SKIP_BUILD
 
 test_unit:
+  <<: *test-tpl
   stage: test
-  except:
-    - triggers
-  tags:
-    - docker
-  image: node:10
   script:
-   - npm install
    - npm run test:unit
 
+# can reuse cache. issue with cypress.
 test_e2e:
+  image: cypress/base:10
   stage: test
-  except:
-    - triggers
   tags:
     - docker
-  environment:
-    name: production
-  image: cypress/base:10
+  except:
+    variables:
+      - $SKIP_TESTS
+    refs:
+      - master@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - tags@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - /^release-.*/@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
   script:
     - npm install
     - npm run test:e2e -- --headless
+
+deploy-snapshot:
+  <<: *build-tpl
+  image: docker-registry.linagora.com:5000/linshare-releases/linshare-build-helper:latest
+  stage: deploy
+  script:
+    - mvn package deploy
+  except:
+    variables:
+      - $SKIP_DEPLOY
+  only:
+    refs:
+      - master@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - /^maintenance-.*/@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
