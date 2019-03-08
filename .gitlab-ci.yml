@@ -42,6 +42,11 @@ prepare:
   except:
     variables:
       - $SKIP_PREPARE
+    refs:
+      - master@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - tags@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - /^release-.*/@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+
 
 linters:
   <<: *build-tpl
