@@ -122,6 +122,14 @@ deploy-snapshot:
     - docker
   script:
     - mvn -P hard-clean clean package deploy
+    - CHANNEL=snapshots
+    - VERSION=$(mvn -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec -q)
+    - curl -s -X POST
+      -F "token=${BUILD_DOCKER_IMAGE_TOKEN}"
+      -F "ref=${CI_COMMIT_REF_NAME}"
+      -F "variables[VERSION]=${VERSION}"
+      -F "variables[CHANNEL]=${CHANNEL}"
+      https://ci.linagora.com/api/v4/projects/1755/trigger/pipeline
   except:
     variables:
       - $SKIP_DEPLOY
