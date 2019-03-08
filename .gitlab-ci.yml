@@ -104,11 +104,12 @@ test_e2e:
     - npm run test:e2e -- --headless
 
 deploy-snapshot:
-  <<: *build-tpl
   image: docker-registry.linagora.com:5000/linshare-releases/linshare-build-helper:latest
   stage: deploy
+  tags:
+    - docker
   script:
-    - mvn package deploy
+    - mvn -P hard-clean clean package deploy
   except:
     variables:
       - $SKIP_DEPLOY

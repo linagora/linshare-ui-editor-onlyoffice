@@ -124,7 +124,7 @@
             <!-- Optional configuration which provides for running
                  any npm command -->
             <configuration>
-                <arguments>install</arguments>
+                <arguments>install --only=production</arguments>
             </configuration>
           </execution>
 
