@@ -88,6 +88,7 @@ test_unit:
   <<: *test-tpl
   stage: test
   script:
+   - npm install
    - npm run test:unit
 
 # can reuse cache. issue with cypress.
