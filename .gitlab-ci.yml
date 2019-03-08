@@ -79,6 +79,10 @@ build:
   except:
     variables:
       - $SKIP_BUILD
+    refs:
+      - master@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - tags@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
+      - /^release-.*/@linagora/lgs/linshare/products/linshare-ui-editor-onlyoffice
 
 test_unit:
   <<: *test-tpl
