@@ -15,7 +15,10 @@ stages:
   policy: pull
 
 .build-tpl: &build-tpl
-  image: node:11
+  # we need to use this specific version of node
+  # otherwise you will get the following error during the tests:
+  # TypeError: Cannot assign to read only property
+  image: node:11.10.1
   tags:
     - docker
   cache:
@@ -93,7 +96,6 @@ test_unit:
   <<: *test-tpl
   stage: test
   script:
-   - npm install
    - npm run test:unit
 
 # can reuse cache. issue with cypress.
