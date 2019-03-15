@@ -1,4 +1,4 @@
-# linshare-editor-onlyoffice-frontend
+# linshare-ui-editor-onlyoffice
 
 Frontend part for LinShare editor tool using OnlyOffice
 
