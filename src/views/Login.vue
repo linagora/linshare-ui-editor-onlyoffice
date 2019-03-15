@@ -48,6 +48,9 @@ export default {
             username: this.email,
             password: this.password
           },
+          headers: {
+            "WWW-No-Authenticate": "linshare"
+          },
           rememberMe: false,
           redirect: { path: redirect ? redirect.from.path : "/" }
         });
