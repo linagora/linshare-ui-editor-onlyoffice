@@ -5,8 +5,9 @@
   "Loading ...": "Đang tải ...",
   "Error while opening document. Please refresh page.": "Có lỗi xảy ra. Vui lòng tải lại trang",
   "Refresh": "Tải lại",
-  "Error!": "Có lỗi!",
+  "Oops!": "Oops!",
   "Document file format is not supported": "Định dạng của tài liệu không được hỗ trợ",
   "Unable to process the document": "Không thể xử lý tài liệu",
-  "Back to LinShare": "Quay lại LinShare"
+  "Back to LinShare": "Quay lại LinShare",
+  "Something went wrong on our side. Please try again later.": "Có lỗi xảy ra ở phía chúng tôi. Vui lòng thử lại sau."
 }

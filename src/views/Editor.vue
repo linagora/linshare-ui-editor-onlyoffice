@@ -88,6 +88,11 @@ export default {
         this.state = "error";
         this.errorType = getErrorType(payload);
       });
+
+      sio.on(WEBSOCKET_EVENTS.CONNECT_ERROR, () => {
+        this.state = "error";
+        this.errorType = "connect";
+      });
     };
 
     document.head.appendChild(documentServerScript);

@@ -1,7 +1,8 @@
 <template>
   <div class="error-display" v-if="errorType">
-    <h1>{{$t("Error!")}}</h1>
+    <h1>{{$t("Oops!")}}</h1>
     <span v-if="errorType === 'extension'">{{$t("Document file format is not supported")}}</span>
+    <span v-if="errorType === 'connect'">{{$t("Something went wrong on our side. Please try again later.")}}</span>
     <span v-else>{{$t("Unable to process the document")}}</span>
     <div class="actions">
       <v-btn v-if="errorType === 'extension'" depressed color="primary" v-bind:href="linshareUrl">{{$t("Back to LinShare")}}</v-btn>

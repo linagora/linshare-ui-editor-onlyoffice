@@ -5,8 +5,9 @@
   "Loading ...": "Loading ...",
   "Error while opening document. Please refresh page.": "Error while opening document. Please refresh page.",
   "Refresh": "Refresh",
-  "Error!": "Error!",
+  "Oops!": "Oops!",
   "Document file format is not supported": "Document file format is not supported",
   "Unable to process the document": "Unable to process the document",
-  "Back to LinShare": "Back to LinShare"
+  "Back to LinShare": "Back to LinShare",
+  "Something went wrong on our side. Please try again later.": "Something went wrong on our side. Please try again later."
 }
