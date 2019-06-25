@@ -1,3 +1,5 @@
+import "./main.styl";
+import "typeface-roboto";
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -9,7 +11,6 @@ import Vuetify from "vuetify";
 import theme from "./theme";
 import { i18n } from "@/i18n/index";
 import settings from "./settings";
-import "./main.styl";
 
 const { LINSHARE_URL } = settings;
 

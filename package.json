@@ -13,7 +13,9 @@
   "dependencies": {
     "@websanova/vue-auth": "^2.21.14-beta",
     "axios": "^0.18.0",
+    "material-design-icons-iconfont": "5.0.1",
     "socket.io-client": "2.1.1",
+    "typeface-roboto": "0.0.54",
     "vue": "^2.5.17",
     "vue-axios": "^2.1.4",
     "vue-i18n": "^8.3.2",
