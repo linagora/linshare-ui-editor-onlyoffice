@@ -7,6 +7,9 @@
         </a>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-items v-if="$auth.check()">
+        <op-user-menu />
+      </v-toolbar-items>
     </v-toolbar>
     <div v-if="$auth.ready()">
       <v-content>
