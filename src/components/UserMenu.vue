@@ -33,8 +33,8 @@ export default {
   name: "op-user-menu",
   methods: {
     logout() {
-      this.$store.dispatch("session/logout").then(() => {
-        this.$router.push({ name: "login" });
+      this.$auth.logout();
+      this.$router.push({ name: "login" });
       });
     },
 
