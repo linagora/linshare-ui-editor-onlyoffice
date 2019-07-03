@@ -7,7 +7,8 @@ export default {
   refreshData: {
     enabled: true,
     url: "linshare/webservice/rest/user/v2/authentication/jwt",
-    method: "GET"
+    method: "GET",
+    interval: "4" // refresh auth token every 4 minutes to make up for 5 minutes life span of auth token
   },
   fetchData: {
     url: "linshare/webservice/rest/user/v2/authentication/authorized",
