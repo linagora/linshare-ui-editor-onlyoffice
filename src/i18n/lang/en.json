@@ -12,5 +12,7 @@
   "Something went wrong on our side. Please try again later.": "Something went wrong on our side. Please try again later.",
   "Document not found": "Document not found",
   "You do not have required permission to edit the document": "You do not have required permission to edit the document",
-  "You are not a member of the target shared space": "You are not a member of the target shared space"
+  "You are not a member of the target shared space": "You are not a member of the target shared space",
+  "E-mail is required": "E-mail is required",
+  "Password is required": "Password is required"
 }

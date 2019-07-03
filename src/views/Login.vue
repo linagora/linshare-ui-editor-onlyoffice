@@ -13,9 +13,9 @@
                   prepend-icon="person"
                   name="login"
                   :label="$t('Login')"
-                  type="text"
+                  type="email"
                   v-model="email"
-                  required
+                  :rules="[v => !!v || $t('E-mail is required')]"
                 ></v-text-field>
                 <v-text-field
                   prepend-icon="lock"
@@ -24,11 +24,16 @@
                   id="password"
                   type="password"
                   v-model="password"
-                  required
+                  :rules="[v => !!v || $t('Password is required')]"
                 ></v-text-field>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn type="submit" :disabled="logMeIn" :loading="logMeIn" @click="login">{{$t('Login')}}</v-btn>
+                  <v-btn
+                    type="submit"
+                    :disabled="logMeIn || !valid"
+                    :loading="logMeIn"
+                    @click="login"
+                  >{{$t('Login')}}</v-btn>
                 </v-card-actions>
               </v-form>
             </v-card-text>
@@ -45,7 +50,8 @@ export default {
     return {
       logMeIn: false,
       email: null,
-      password: null
+      password: null,
+      valid: true
     };
   },
   methods: {

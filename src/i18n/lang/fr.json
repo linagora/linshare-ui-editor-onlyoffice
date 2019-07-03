@@ -12,5 +12,7 @@
   "Something went wrong on our side. Please try again later.": "Quelque-chose s'est mal passé de notre côté. Veuillez réessayer plus tard.",
   "Document not found": "Document non trouvé",
   "You do not have required permission to edit the document": "Vous n'avez pas la permission requise pour éditer le document",
-  "You are not a member of the target shared space": "Vous n'êtes pas un membre de l'espace partagé cible"
+  "You are not a member of the target shared space": "Vous n'êtes pas un membre de l'espace partagé cible",
+  "E-mail is required": "Le e-mail doit est obligatoire",
+  "Password is required": "Le mot de passe est obligatoire"
 }
