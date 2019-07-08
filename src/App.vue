@@ -11,13 +11,13 @@
         <op-user-menu />
       </v-toolbar-items>
     </v-toolbar>
-    <div v-if="$auth.ready()">
-      <v-content>
+    <v-content v-if="$auth.ready()">
+      <v-container fluid fill-height pa-0>
         <v-layout justify-center align-center>
           <router-view/>
         </v-layout>
-      </v-content>
-    </div>
+      </v-container>
+    </v-content>
     <div v-else>
       <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
     </div>
