@@ -2,7 +2,8 @@ const defaults = {
   LINSHARE_URL: process.env.VUE_APP_LINSHARE_URL || "http://172.17.0.1:30000",
   DOCUMENT_SERVER_URL: process.env.VUE_APP_DOCUMENT_SERVER_URL || "http://172.17.0.1:80",
   BACKEND_URL: process.env.VUE_APP_BACKEND_URL || "http://172.17.0.1:8081",
-  LINSHARE_UI_USER_URL: process.env.VUE_APP_LINSHARE_UI_USER_URL || "http://172.17.0.1:30000"
+  LINSHARE_UI_USER_URL: process.env.VUE_APP_LINSHARE_UI_USER_URL || "http://172.17.0.1:30000",
+  LINSHARE_SHARED_SPACE_PATH: process.env.VUE_APP_LINSHARE_SHARED_SPACE_PATH || "/#/sharedspace/list"
 };
 
 const settings = { ...defaults, ...window.linshareEditor };
