@@ -1,0 +1,20 @@
+{
+  "Login": "Вход",
+  "Password": "Пароль",
+  "Welcome to Vue.js App": "Добро пожаловать в приложение Vue.js",
+  "Loading ...": "Загрузка ...",
+  "Error while opening document. Please refresh page.": "Ошибка при открытии документа. Пожалуйста, обновите страницу.",
+  "Refresh": "Обновить",
+  "Oops!": "Oops!",
+  "Document file format is not supported": "Формат файла документа не поддерживается",
+  "Unable to process the document": "Невозможно обработать документ",
+  "Back to LinShare": "Вернуться к LinShare",
+  "Something went wrong on our side. Please try again later.": "С нашей стороны что-то пошло не так. Пожалуйста, попробуйте позже.",
+  "Document not found": "Документ не найден",
+  "You do not have required permission to edit the document": "У вас нет необходимого разрешения на редактирование документа",
+  "You are not a member of the target shared space": "Вы не являетесь участником целевого общего пространства",
+  "E-mail is required": "Требуется электронная почта",
+  "Password is required": "Hеобходим пароль",
+  "LinShare collaborative document editor": "LinShare совместный редактор документов",
+  "Start editing document": "Начать редактирование документа"
+}
