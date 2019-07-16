@@ -13,6 +13,8 @@
   "dependencies": {
     "@websanova/vue-auth": "^2.21.14-beta",
     "axios": "^0.18.0",
+    "flag-icon-css": "2.8.0",
+    "identity-obj-proxy": "3.0.0",
     "material-design-icons-iconfont": "5.0.1",
     "socket.io-client": "2.1.1",
     "typeface-roboto": "0.0.54",

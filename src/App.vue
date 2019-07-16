@@ -7,6 +7,9 @@
         </a>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-items v-if="!$auth.check()">
+        <language-menu />
+      </v-toolbar-items>
       <v-toolbar-items v-if="$auth.check()">
         <op-user-menu />
       </v-toolbar-items>
@@ -27,6 +30,7 @@
 
 <script>
 import UserMenu from "@/components/UserMenu.vue";
+import LanguageMenu from "@/components/LanguageMenu.vue";
 import Snackbar from "@/components/Snackbar.vue";
 import settings from "@/settings";
 
@@ -38,6 +42,7 @@ export default {
   },
   components: {
     "op-user-menu": UserMenu,
+    "language-menu": LanguageMenu,
     "op-snackbar": Snackbar
   }
 };
