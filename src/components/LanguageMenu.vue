@@ -43,11 +43,11 @@ export default {
 <style src="flag-icon-css/css/flag-icon.min.css" scoped />
 
 <style lang="stylus" scoped>
-  .language-menu {
-    padding-top: 3px;
-  }
+.language-menu {
+  padding-top: 3px;
+}
 
-  .language-name {
-    margin-left: 10px;
-  }
+.language-name {
+  margin-left: 10px;
+}
 </style>

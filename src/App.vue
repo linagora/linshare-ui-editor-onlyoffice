@@ -3,7 +3,7 @@
     <v-toolbar clipped-left app fixed color="primary" height="54">
       <v-toolbar-title>
         <a v-bind:href="linshareUrl">
-          <img src="@/assets/linshare-logo-white.png" alt="LinShare logo"/>
+          <img src="@/assets/linshare-logo-white.png" alt="LinShare logo" />
         </a>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -17,14 +17,14 @@
     <v-content v-if="$auth.ready()">
       <v-container fluid fill-height pa-0>
         <v-layout justify-center align-center>
-          <router-view/>
+          <router-view />
         </v-layout>
       </v-container>
     </v-content>
     <div v-else>
       <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
     </div>
-    <op-snackbar/>
+    <op-snackbar />
   </v-app>
 </template>
 

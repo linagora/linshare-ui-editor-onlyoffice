@@ -4,7 +4,7 @@
 
     <div class="loading-spinner" v-if="state === 'loading'">
       <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
-      <v-card-text class="loading-text">{{$t("Loading ...")}}</v-card-text>
+      <v-card-text class="loading-text">{{ $t("Loading ...") }}</v-card-text>
     </div>
 
     <error-display v-if="state === 'error'" :error-type="errorType"></error-display>
@@ -100,17 +100,20 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-  .editor
-    width: 100vw;
-    height: calc(100vh - 54px);
+.editor {
+  width: 100vw;
+  height: calc(100vh - 54px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loading-spinner {
     display: flex;
-    justify-content: center;
     align-items: center;
 
-    .loading-spinner
-      display: flex;
-      align-items: center;
-
-      .loading-text
-        font-weight: bold;
+    .loading-text {
+      font-weight: bold;
+    }
+  }
+}
 </style>
