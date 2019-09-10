@@ -1,5 +1,5 @@
 import "./main.styl";
-import "typeface-roboto";
+import "roboto-fontface";
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
