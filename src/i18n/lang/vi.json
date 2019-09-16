@@ -13,9 +13,12 @@
   "Document not found.": "Không tìm thấy tài liệu",
   "You do not have required permission to edit the document": "Bạn không có quyền sửa tài liệu này",
   "You are not a member of the target shared space": "Bạn không phải là thành viên của thư mục chia sẻ",
-  "E-mail is required": "Thư điện tử là bắt buộc",
+  "Email is required": "Thư điện tử là bắt buộc",
   "Password is required": "Mật khẩu là bắt buộc",
   "LinShare collaborative document editor": "Trình biên soạn dành cho LinShare",
   "Start editing document": "Bắt đầu chỉnh sửa tài liệu",
-  "Log out": "Đăng xuất"
+  "Log out": "Đăng xuất",
+  "Login error, please retry": "Lỗi đăng nhập, hãy thử lại",
+  "Close": "Đóng",
+  "Email": "Thư điện tử"
 }

@@ -13,9 +13,12 @@
   "Document not found": "Документ не найден",
   "You do not have required permission to edit the document": "У вас нет необходимого разрешения на редактирование документа",
   "You are not a member of the target shared space": "Вы не являетесь участником целевого общего пространства",
-  "E-mail is required": "Требуется электронная почта",
+  "Email is required": "Требуется электронная почта",
   "Password is required": "Hеобходим пароль",
   "LinShare collaborative document editor": "LinShare совместный редактор документов",
   "Start editing document": "Начать редактирование документа",
-  "Log out": "Выход"
+  "Log out": "Выход",
+  "Login error, please retry": "Ошибка входа, повторите попытку",
+  "Close": "Закрыть",
+  "Email": "Имейл"
 }

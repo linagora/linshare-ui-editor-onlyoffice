@@ -8,11 +8,11 @@
         <v-form @submit.prevent="login" v-model="valid" ref="form">
           <v-text-field
             prepend-icon="person"
-            name="login"
-            :label="$t('Login')"
+            name="email"
+            :label="$t('Email')"
             type="email"
             v-model="email"
-            :rules="[v => !!v || $t('E-mail is required')]"
+            :rules="emailRules"
           ></v-text-field>
           <v-text-field
             prepend-icon="lock"
@@ -21,7 +21,7 @@
             id="password"
             type="password"
             v-model="password"
-            :rules="[v => !!v || $t('Password is required')]"
+            :rules="passwordRules"
           ></v-text-field>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -45,6 +45,26 @@ export default {
       valid: true
     };
   },
+  computed: {
+    emailRules() {
+      const rules = [];
+
+      if (!this.email) {
+        rules.push(this.$i18n.t("Email is required"));
+      }
+
+      return rules;
+    },
+    passwordRules() {
+      const rules = [];
+
+      if (!this.password) {
+        rules.push(this.$i18n.t("Password is required"));
+      }
+
+      return rules;
+    }
+  },
   methods: {
     login: async function() {
       this.logMeIn = true;
@@ -67,7 +87,7 @@ export default {
         this.$store.dispatch("session/setJWTToken", response.data.token);
       } catch (e) {
         this.$store.dispatch("ui/displaySnackbar", {
-          message: "Login error, please retry"
+          message: this.$i18n.t("Login error, please retry")
         });
       } finally {
         this.logMeIn = false;

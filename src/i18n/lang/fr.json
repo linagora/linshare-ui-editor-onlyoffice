@@ -13,9 +13,12 @@
   "Document not found": "Document non trouvé",
   "You do not have required permission to edit the document": "Vous n'avez pas la permission requise pour éditer le document",
   "You are not a member of the target shared space": "Vous n'êtes pas un membre de l'espace partagé cible",
-  "E-mail is required": "Le e-mail doit est obligatoire",
+  "Email is required": "Le email doit est obligatoire",
   "Password is required": "Le mot de passe est obligatoire",
   "LinShare collaborative document editor": "Éditeur du document collaborative LinShare",
   "Start editing document": "Commencer l'édition du document",
-  "Log out": "Déconnexion"
+  "Log out": "Déconnexion",
+  "Login error, please retry": "Erreur de login, merci d'essayer à nouveau",
+  "Close": "Fermer",
+  "Email": "Email"
 }

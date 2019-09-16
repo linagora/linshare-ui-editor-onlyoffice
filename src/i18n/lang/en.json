@@ -13,9 +13,12 @@
   "Document not found": "Document not found",
   "You do not have required permission to edit the document": "You do not have required permission to edit the document",
   "You are not a member of the target shared space": "You are not a member of the target shared space",
-  "E-mail is required": "E-mail is required",
+  "Email is required": "Email is required",
   "Password is required": "Password is required",
   "LinShare collaborative document editor": "LinShare collaborative document editor",
   "Start editing document": "Start editing document",
-  "Log out": "Log out"
+  "Log out": "Log out",
+  "Login error, please retry": "Login error, please retry",
+  "Close": "Close",
+  "Email": "Email"
 }
